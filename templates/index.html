@@ -5,36 +5,89 @@
 {% endblock %}
 
 {% block body %}
-<div class="content">
-  <h1 style="text-align: center">Blog</h1>
-  {% if blogs|length < 1 %}
-  <h4 style="text-align: center">There are no blogs. Create one below!</h4>
-  {% else %}
-  <table>
-    <tr>
-      <th>Blog Post</th>
-      <th>Added</th>
-      <th>Actions</th>
-    </tr>
-    {% for blog in blogs %}
-    <tr>
-      <td>{{ blog.content }}</td>
-      <td>{{ blog.date_created.date() }}</td>
-      <td>
-        <a href="/delete/{{blog.id}}">Delete</a>
-        <br>
-        <a href="/update/{{blog.id}}">Update</a>
-      </td>
-    </tr>
-    {% endfor %}
-  </table>
-  {% endif %}
+<!--Navbar-->
+<nav id="mainNavbar" class="navbar navbar-expand-lg py-1 fixed-top">
+  <div class="container"><a class="navbar-brand" href="{{ url_for('index') }}">Home</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto">
+        <li class="nav-item">
+          <a class="nav-link" href="{{ url_for('blog') }}">Blog</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{{ url_for('about') }}">About</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{{ url_for('contact') }}">Contact</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+<!--Blog List-->
 
-  <div class="form">
+<!-- <div class="form">
     <form action="/" method="POST">
-      <input type="text" name="content" id="content">
-      <input type="submit" value="Add Blog">
+      <table id="submit_table">
+        <tr>
+          <th>Title</th>
+          <th>Body</th>
+          <th>Category</th>
+          <th>Submit</th>
+        </tr>
+        <tr>
+          <td><input type="text" name="title" id="title"></td>
+          <td><textarea type="text" name="content" id="content"></textarea></td>
+          <td><input type="text" name="category" id="category"></td>
+          <td><input type="submit" class="btn btn-primary" value="Add Blog"></td>
+        </tr>
+      </table>
     </form>
+  </div> -->
+
+<!--New Blog Form-->
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="well well-sm">
+        <form class="form-horizontal" action="/" method="post">
+          <fieldset>
+            <legend class="text-left header">Blog Creator</legend>
+
+            <div class="form-group">
+              <span class="col-md-1 col-md-offset-2 text-center"><i class="fas fa-signature"></i></span>
+              <div class="col-md-8">
+                <input id="title" name="title" type="text" placeholder="Title" class="form-control">
+              </div>
+            </div>
+            <div class="form-group">
+              <span class="col-md-1 col-md-offset-2 text-center"><i class="far fa-list-alt"></i></i></span>
+              <div class="col-md-8">
+                <input id="category" name="category" type="text" placeholder="Category" class="form-control">
+              </div>
+            </div>
+            <div class="form-group">
+              <span class="col-md-1 col-md-offset-2 text-center"><i class="fas fa-paragraph"></i></span>
+              <div class="col-md-8">
+                <textarea class="form-control" id="content" name="content"
+                  placeholder="Enter the body of your post here" rows="12"></textarea>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <div class="col-md-12 text-center">
+                <button type="submit" class="btn btn-primary btn-lg">Submit</button>
+              </div>
+            </div>
+          </fieldset>
+        </form>
+      </div>
+    </div>
   </div>
 </div>
+
+
 {% endblock %}

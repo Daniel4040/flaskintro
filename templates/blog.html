@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+
+{% block head %}
+<title>Blog</title>
+{% endblock %}
+
+{% block body %}
+<!--Blog List-->
+<div class="content">
+    <h1 style="text-align: center">Blog</h1>
+    {% if blogs|length < 1 %}
+    <h4 style="text-align: center">There are no blogs. Create one below!</h4>
+    {% else %}
+    <table>
+        <tr>
+            <th>Title</th>
+            <th>Blog Post</th>
+            <th>Category</th>
+            <th>Added</th>
+            <th>Actions</th>
+        </tr>
+        {% for blog in blogs %}
+        <tr>
+            <td>{{ blog.title }}</td>
+            <td>{{ blog.content }}</td>
+            <td>{{ blog.category }}</td>
+            <td>{{ blog.date_published.date() }}</td>
+            <td>
+                <a href="/delete/{{blog.id}}">Delete</a>
+                <br>
+                <a href="/update/{{blog.id}}">Update</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+    {% endif %}
+</div>
+{% endblock %}
