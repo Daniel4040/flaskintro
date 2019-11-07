@@ -6,7 +6,13 @@
 
 {% block body %}
 <!--Blog List-->
-<div class="content">
+<div id="tippytop">
+    <div class="form-group">
+        <div class="col-md-12 text-center">
+            <a class="btn btn-outline-primary btn-md" id="addblogbutton" href="{{ url_for('createblog') }}">Add
+                Blog</a>
+        </div>
+    </div>
     <h1 style="text-align: center">Blog</h1>
     {% if blogs|length < 1 %}
     <h4 style="text-align: center">There are no blogs. Create one below!</h4>

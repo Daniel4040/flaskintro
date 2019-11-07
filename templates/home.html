@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block head %}
+<title>Home</title>
+{% endblock %}
+
+{% block body %}
+
+<!--Blog List-->
+
+<main class="intro-section">
+  <!--New Blog Form-->
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12 text-center">
+        <p>Love For The Outdoors</p>
+        <p><a type="button" class="btn btn-success btn-lg" href="{{ url_for('blog') }}">Explore</a></p>
+      </div>
+    </div>
+  </div>
+</main>
+
+
+
+{% endblock %}

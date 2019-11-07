@@ -51,7 +51,7 @@ def index():
             return 'There was an issue adding your blog post'
 
     else:
-        return render_template('index.html')
+        return render_template('home.html')
 
 
 @app.route('/delete/<int:id>')
@@ -69,7 +69,7 @@ def delete(id):
 @app.route('/update/<int:id>', methods=['GET', 'POST'])
 def update(id):
     blog = Blog.query.get_or_404(id)
-    category = Category.query.get_or_404(id)  # this could be the wrong id
+    category = Category.query.get_or_404(id)
 
     if request.method == 'POST':
         blog.title = request.form['title']
@@ -86,10 +86,20 @@ def update(id):
         return render_template('update.html', blog=blog)
 
 
+@app.route('/home/')
+def home():
+    return render_template('home.html')
+
+
 @app.route('/blog/')
 def blog():
     blogs = Blog.query.order_by(Blog.date_published).all()
     return render_template('blog.html', blogs=blogs)
+
+
+@app.route('/createblog/')
+def createblog():
+    return render_template('createblog.html')
 
 
 @app.route('/about/')

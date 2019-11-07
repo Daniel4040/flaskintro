@@ -2,36 +2,41 @@ html {
   scroll-behavior: smooth;
 }
 
+/* main.masthead {
+  padding-top: 200px;
+  padding-bottom: 15%;
+} */
+
 /*Navbar styling*/
 #mainNavbar {
   font-size: 1.5rem;
   font-weight: 100;
+  /* background-color: rgb(102, 102, 102); */
 }
 
-#mainNavbar .nav-link {
-  color: black;
-}
+/* #mainNavbar .nav-link {
+  color: rgb(255, 255, 255);
+} */
 
 #mainNavbar .nav-link:hover {
   color: #c0392b;
 }
 
 #mainNavbar .navbar-brand {
-  color: black;
+  color: rgb(255, 255, 255);
+  font-family: "Kaushan Script";
+  font-weight: 200;
   font-size: 1.5rem;
+  text-transform: none;
 }
 
-.navbar.scrolled {
-  background: #34495e;
-  transition: background 500ms;
-}
 .navbar a {
   font-family: "Montserrat", "Helvetica Neue", Helvetica, Arial, cursive;
   text-decoration: none;
   text-transform: uppercase;
   font-weight: 500;
   letter-spacing: 1px;
-  color: black;
+  color: white;
 }
 
 .nav-item {
@@ -39,11 +44,51 @@ html {
   text-transform: uppercase;
   font-weight: 500;
   letter-spacing: 1px;
-  color: black;
+}
+
+@media (max-width: 768px) {
+  .navbar {
+    background-color: #34495e;
+  }
+}
+@media (min-width: 576px) {
+  main.masthead {
+    padding-top: 25vh;
+  }
+}
+@media (min-width: 768px) {
+  main.masthead {
+    padding-top: 35vh;
+  }
+}
+@media (min-width: 992px) {
+  main.masthead {
+    padding-top: 40vh;
+  }
 }
 
 /*End Navbar styling*/
 
+/* Home Page */
+
+.intro-section {
+  height: 100vh;
+  background-image: url(../img/durango-rr.jpg);
+  background-size: cover;
+  font-family: "Montserrat";
+  text-transform: uppercase;
+  padding-top: 40vh;
+}
+
+.intro-section p {
+  color: #fff;
+  font-size: 4vw;
+  font-weight: 700;
+}
+
+/* End Home Page */
+
+/* Blog Page */
 table,
 td,
 th {
@@ -64,23 +109,10 @@ td {
   padding: 20px;
 }
 
-/* .form {
-  margin-top: 20px;
-} */
+/* End Blog Page */
 
-/* #content {
-  width: 70%;
-} */
+/* Create body gap for navbar */
 
-/* Form specific CSS*/
-
-.header {
-  color: #36a0ff;
-  font-size: 27px;
-  padding: 10px;
+#tippytop {
+  margin-top: 100px;
 }
-
-/* .bigicon {
-  font-size: 35px;
-  color: #36a0ff;
-} */
