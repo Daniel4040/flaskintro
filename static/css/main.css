@@ -111,6 +111,38 @@ td {
 
 /* End Blog Page */
 
+/* About Page */
+
+#aboutparagraphs {
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+}
+
+img {
+  height: 225px;
+  width: 225px;
+  border: 7px solid #fff;
+  border-top-color: rgb(255, 255, 255);
+  border-top-style: solid;
+  border-top-width: 7px;
+  border-right-color: rgb(255, 255, 255);
+  border-right-style: solid;
+  border-right-width: 7px;
+  border-bottom-color: rgb(255, 255, 255);
+  border-bottom-style: solid;
+  border-bottom-width: 7px;
+  border-left-color: rgb(255, 255, 255);
+  border-left-style: solid;
+  border-left-width: 7px;
+  border-image-source: initial;
+  border-image-slice: initial;
+  border-image-width: initial;
+  border-image-outset: initial;
+  border-image-repeat: initial;
+  position: center;
+  margin-bottom: 20px;
+}
+
 /* Create body gap for navbar */
 
 #tippytop {

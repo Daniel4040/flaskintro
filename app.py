@@ -102,6 +102,11 @@ def createblog():
     return render_template('createblog.html')
 
 
+@app.route('/videos/')
+def videos():
+    return render_template('videos.html')
+
+
 @app.route('/about/')
 def about():
     return render_template('about.html')
