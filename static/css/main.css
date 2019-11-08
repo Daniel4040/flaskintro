@@ -86,9 +86,31 @@ html {
   font-weight: 700;
 }
 
+#welcome {
+  padding-top: 20vh;
+  padding-bottom: 20vh;
+}
+
+#welcome a {
+  text-decoration: none;
+  color: black;
+}
+
+#welcome-link p {
+  text-decoration: none;
+  font-style: italic;
+  color: #6c757d;
+  margin-bottom: 4rem;
+}
+
 /* End Home Page */
 
 /* Blog Page */
+
+#blog-table {
+  padding-bottom: 4rem;
+}
+
 table,
 td,
 th {
@@ -104,6 +126,7 @@ th {
   height: 30px;
 }
 
+th,
 td {
   text-align: center;
   padding: 20px;
@@ -121,19 +144,19 @@ td {
 img {
   height: 225px;
   width: 225px;
-  border: 7px solid #fff;
-  border-top-color: rgb(255, 255, 255);
+  border: 4px solid rgb(214, 214, 214);
+  border-top-color: rgb(214, 214, 214);
   border-top-style: solid;
-  border-top-width: 7px;
-  border-right-color: rgb(255, 255, 255);
+  border-top-width: 4px;
+  border-right-color: rgb(214, 214, 214);
   border-right-style: solid;
-  border-right-width: 7px;
-  border-bottom-color: rgb(255, 255, 255);
+  border-right-width: 4px;
+  border-bottom-color: rgb(214, 214, 214);
   border-bottom-style: solid;
-  border-bottom-width: 7px;
-  border-left-color: rgb(255, 255, 255);
+  border-bottom-width: 4px;
+  border-left-color: rgb(214, 214, 214);
   border-left-style: solid;
-  border-left-width: 7px;
+  border-left-width: 4px;
   border-image-source: initial;
   border-image-slice: initial;
   border-image-width: initial;

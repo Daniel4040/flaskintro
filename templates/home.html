@@ -8,18 +8,62 @@
 
 <!--Blog List-->
 
-<main class="intro-section">
+<div class="intro-section">
   <!--New Blog Form-->
   <div class="container">
     <div class="row">
       <div class="col-md-12 text-center">
         <p>Love For The Outdoors</p>
-        <p><a type="button" class="btn btn-success btn-lg" href="{{ url_for('blog') }}">Explore</a></p>
+        <p><a type="button" class="btn btn-success btn-lg" href="#welcome">Explore</a></p>
       </div>
     </div>
   </div>
-</main>
+</div>
 
-
-
+<div id="welcome">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <h1>Welcome</h1>
+        <p>Fellow outdoors enthusiasts, we are This Scenic Life, and our passion here is to showcase some of our
+          favorite outdoors travel from around the United States. Our primary focus is hiking, but we will be
+          showcasing
+          scenic roads, some of our favorite towns and cities, and other places that bring a sense of peace and
+          appreciation amongst the grind of everyday life.</p>
+        <p>Below you will find links to some of our favorite hiking locations such as Zion National Park, Western
+          Colorado, and even the sandstone bluffs of coastal California.</p>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-4">
+        <div class="text-center"><a href="https://youtu.be/nHWv6SiL1Gs" id="welcome-link"><img
+              class="rounded-circle mx-auto" src="/static/img/zion-canyon.jpg" alt="" /></a>
+          <a href="https://youtu.be/nHWv6SiL1Gs" id="welcome-link">
+            <h3>Zion National Park</h3>
+            <p>The most scenic place in the American Southwest</p>
+          </a>
+        </div>
+      </div>
+      <div class="col-sm-4">
+        <div class="text-center"><a href="https://youtu.be/ZlWe6aCjBgc" id="welcome-link"><img
+              class="rounded-circle mx-auto" src="/static/img/crested-butte-fall.jpg" alt="" /></a>
+          <a href="https://youtu.be/ZlWe6aCjBgc" id="welcome-link">
+            <h3>Crested Butte</h3>
+            <p>Stunning fall foliage colors in the Western and Southwestern portions of the rocky mountains</p>
+          </a>
+        </div>
+      </div>
+      <div class="col-sm-4">
+        <div class="text-center"><a href="https://youtu.be/UkKJ5esbd_U" id="welcome-link"><img
+              class="rounded-circle mx-auto" src="/static/img/san-diego-coast.jpg" alt="" /></a>
+          <a href="https://youtu.be/UkKJ5esbd_U" id="welcome-link">
+            <h3>Coastal California</h3>
+            <p>Anywhere along the pacific coast highway is a place to stop, relax, and take in the view</p>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
 {% endblock %}
