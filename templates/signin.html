@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+
+{% block head %}
+<title>Sign In</title>
+{% endblock %}
+
+{% block body %}
+<div class="container" id="tippytop">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="well well-sm">
+                <form class="form-horizontal" action="{{ url_for('signin') }}" method="post">
+                    <fieldset>
+                        <legend class="text-left header">Sign In</legend>
+                        <div class="form-group">
+                            <span class="col-md-1 col-md-offset-2 text-center"><i class="fas fa-signature"></i></span>
+                            <div class="col-md-8">
+                                <input id="username" name="username" type="text" placeholder="Username"
+                                    class="form-control">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <span class="col-md-1 col-md-offset-2 text-center"><i
+                                    class="far fa-list-alt"></i></i></span>
+                            <div class="col-md-8">
+                                <input id="password" name="password" type="text" placeholder="Password"
+                                    class="form-control">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-12 text-center">
+                                <button type="submit" class="btn btn-primary btn-lg">Submit</button>
+                            </div>
+                        </div>
+                        <a class="btn btn-success btn-lg" id="signup" href="{{ url_for('signup') }}">Sign Up</a>
+                    </fieldset>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

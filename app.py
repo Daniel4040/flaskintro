@@ -33,7 +33,17 @@ class Category(db.Model):
         return self.name
 
 
-@app.route('/', methods=['POST', 'GET'])
+class User(db.Model):
+    # For creating admin users who can post new blogs to the website
+    id = db.Column(db.Integer, primary_key=True)
+    username = db.Column(db.Text, nullable=False)
+    password = db.Column(db.String(20), nullable=False)
+
+    def __repr__(self):
+        return '<User %r>' % self.id
+
+
+@app.route('/blog/', methods=['POST', 'GET'])
 def index():
     if request.method == 'POST':
         blog_title = request.form['title']
@@ -46,12 +56,50 @@ def index():
         try:
             db.session.add(new_blog)
             db.session.commit()
-            return redirect('/')
+            return redirect('/blog/')
         except:
             return 'There was an issue adding your blog post'
 
     else:
-        return render_template('home.html')
+        blogs = Blog.query.order_by(Blog.date_published).all()
+        return render_template('blog.html', blogs=blogs)
+
+
+@app.route('/signup/', methods=['POST', 'GET'])
+def add_user():
+    if request.method == 'POST':
+        username = request.form['new_username']
+        password = request.form['new_password']
+        new_user = User(username=username, password=password)
+
+        try:
+            db.session.add(new_user)
+            db.session.commit()
+            return redirect('/home/')
+        except:
+            return 'There was an issue signing in. Please try again.'
+
+    else:
+        return render_template('signup.html')
+
+
+@app.route('/signin/', methods=['POST', 'GET'])
+def log_in():
+    if request.method == 'POST':
+        username = request.form['username']
+        password = request.form['password']
+        user_db_check = User.query.filter_by(username=username).first()
+
+        if user_db_check is None:
+            return 'Username does not match our records. Please try again'
+        else:
+            if user_db_check.password == password:
+                return render_template('home.html')
+            else:
+                return 'Password does not match our records. Please try again'
+
+    else:
+        return render_template('signin.html')
 
 
 @app.route('/delete/<int:id>')
@@ -86,6 +134,11 @@ def update(id):
         return render_template('update.html', blog=blog)
 
 
+@app.route('/')
+def baseurl():
+    return render_template('home.html')
+
+
 @app.route('/home/')
 def home():
     return render_template('home.html')
@@ -115,6 +168,16 @@ def about():
 @app.route('/contact/')
 def contact():
     return render_template('contact.html')
+
+
+@app.route('/signin/')
+def signin():
+    return render_template('signin.html')
+
+
+@app.route('/signup/')
+def signup():
+    return render_template('signup.html')
 
 
 if __name__ == "__main__":
