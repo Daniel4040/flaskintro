@@ -1,8 +1,10 @@
 from flask import Flask, render_template, url_for, request, redirect
 from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
+from werkzeug.security import generate_password_hash, check_password_hash
 
 app = Flask(__name__)
+app.config['SECRET_KEY'] = '9OLWxND4o83j4K4iuopO'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///blog_list.db'
 db = SQLAlchemy(app)
@@ -36,15 +38,16 @@ class Category(db.Model):
 class User(db.Model):
     # For creating admin users who can post new blogs to the website
     id = db.Column(db.Integer, primary_key=True)
-    username = db.Column(db.Text, nullable=False)
-    password = db.Column(db.String(20), nullable=False)
+    name = db.Column(db.String(32), nullable=False)
+    username = db.Column(db.String(32), unique=True, nullable=False)
+    password = db.Column(db.String(32), nullable=False)
 
     def __repr__(self):
         return '<User %r>' % self.id
 
 
 @app.route('/blog/', methods=['POST', 'GET'])
-def index():
+def add_blog():
     if request.method == 'POST':
         blog_title = request.form['title']
         blog_content = request.form['content']
@@ -68,14 +71,20 @@ def index():
 @app.route('/signup/', methods=['POST', 'GET'])
 def add_user():
     if request.method == 'POST':
+        name = request.form['new_name']
         username = request.form['new_username']
         password = request.form['new_password']
-        new_user = User(username=username, password=password)
 
+        user_db_check = User.query.filter_by(username=username).first()
+        if user_db_check is True:
+            return redirect('/signup/')
+
+        new_user = User(name=name, username=username,
+                        password=generate_password_hash(password, method='sha256'))
         try:
             db.session.add(new_user)
             db.session.commit()
-            return redirect('/home/')
+            return redirect('/signup/')
         except:
             return 'There was an issue signing in. Please try again.'
 
@@ -135,13 +144,13 @@ def update(id):
 
 
 @app.route('/')
-def baseurl():
-    return render_template('home.html')
+def index():
+    return render_template('index.html')
 
 
 @app.route('/home/')
 def home():
-    return render_template('home.html')
+    return render_template('index.html')
 
 
 @app.route('/blog/')
@@ -175,9 +184,19 @@ def signin():
     return render_template('signin.html')
 
 
+@app.route('/signout')
+def signout():
+    return 'Signed Out'
+
+
 @app.route('/signup/')
 def signup():
     return render_template('signup.html')
+
+
+@app.route('/profile')
+def profile():
+    return render_template('profile.html')
 
 
 if __name__ == "__main__":
