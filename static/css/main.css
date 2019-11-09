@@ -52,17 +52,17 @@ html {
   }
 }
 @media (min-width: 576px) {
-  main.masthead {
+  .background {
     padding-top: 25vh;
   }
 }
 @media (min-width: 768px) {
-  main.masthead {
+  .background {
     padding-top: 35vh;
   }
 }
 @media (min-width: 992px) {
-  main.masthead {
+  .background {
     padding-top: 40vh;
   }
 }
@@ -71,19 +71,36 @@ html {
 
 /* Home Page */
 
-.intro-section {
+.background {
   height: 100vh;
-  background-image: url(../img/durango-rr.jpg);
+  position: relative;
+  background-image: url(../img/durango-rr-bg.jpg);
   background-size: cover;
   font-family: "Montserrat";
   text-transform: uppercase;
   padding-top: 40vh;
+  text-shadow: 2px 8px 6px rgba(0, 0, 0, 0.4), 0px 8px 13px rgba(0, 0, 0, 0.1),
+    0px 18px 23px rgba(0, 0, 0, 0.1);
+  z-index: 2;
+}
+
+.overlay {
+  position: absolute;
+  background-color: #03c52d;
+  background-size: cover;
+  height: 100vh;
+  opacity: 0.2;
+  z-index: 1;
+}
+.intro-section {
+  position: relative;
+  z-index: 3;
 }
 
 .intro-section p {
   color: #fff;
   font-size: 4vw;
-  font-weight: 700;
+  font-weight: 800;
 }
 
 #welcome {
