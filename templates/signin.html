@@ -9,6 +9,13 @@
     <div class="row">
         <div class="col-md-12">
             <div class="well well-sm">
+                {% with messages = get_flashed_messages() %}
+                {% if messages %}
+                <div class="notification is-danger">
+                    {{ messages[0] }}
+                </div>
+                {% endif %}
+                {% endwith %}
                 <form class="form-horizontal" action="{{ url_for('signin') }}" method="post">
                     <fieldset>
                         <legend class="text-left header">Sign In</legend>
@@ -30,6 +37,12 @@
                         <div class="form-group">
                             <div class="col-md-12 text-center">
                                 <button type="submit" class="btn btn-primary btn-lg">Submit</button>
+                            </div>
+                            <div class="field">
+                                <label class="checkbox">
+                                    <input type="checkbox">
+                                    Remember me
+                                </label>
                             </div>
                         </div>
                         <a class="btn btn-success btn-lg" id="signup" href="{{ url_for('signup') }}">Sign Up</a>

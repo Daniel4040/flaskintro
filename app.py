@@ -1,13 +1,23 @@
-from flask import Flask, render_template, url_for, request, redirect
+from flask import Flask, render_template, url_for, request, redirect, flash
 from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
 from werkzeug.security import generate_password_hash, check_password_hash
+from flask_login import UserMixin, LoginManager, login_user, logout_user, login_required, current_user
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = '9OLWxND4o83j4K4iuopO'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///blog_list.db'
 db = SQLAlchemy(app)
+
+login_manager = LoginManager()
+login_manager.login_view = 'app.signin'
+login_manager.init_app(app)
+
+
+@login_manager.user_loader
+def load_user(user_id):
+    return User.query.get(int(user_id))
 
 
 class Blog(db.Model):
@@ -35,15 +45,12 @@ class Category(db.Model):
         return self.name
 
 
-class User(db.Model):
+class User(UserMixin, db.Model):
     # For creating admin users who can post new blogs to the website
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(32), nullable=False)
     username = db.Column(db.String(32), unique=True, nullable=False)
     password = db.Column(db.String(32), nullable=False)
-
-    def __repr__(self):
-        return '<User %r>' % self.id
 
 
 @app.route('/blog/', methods=['POST', 'GET'])
@@ -74,38 +81,34 @@ def add_user():
         name = request.form['new_name']
         username = request.form['new_username']
         password = request.form['new_password']
-
         user_db_check = User.query.filter_by(username=username).first()
-        if user_db_check is True:
+        if user_db_check:
+            flash('Email address already exists')
             return redirect('/signup/')
-
-        new_user = User(name=name, username=username,
-                        password=generate_password_hash(password, method='sha256'))
-        try:
+        else:
+            new_user = User(name=name, username=username,
+                            password=generate_password_hash(password, method='sha256'))
             db.session.add(new_user)
             db.session.commit()
             return redirect('/signup/')
-        except:
-            return 'There was an issue signing in. Please try again.'
-
     else:
         return render_template('signup.html')
 
 
 @app.route('/signin/', methods=['POST', 'GET'])
-def log_in():
+def sign_in():
     if request.method == 'POST':
         username = request.form['username']
         password = request.form['password']
+        remember = True if request.form.get('remember') else False
         user_db_check = User.query.filter_by(username=username).first()
 
-        if user_db_check is None:
-            return 'Username does not match our records. Please try again'
-        else:
-            if user_db_check.password == password:
-                return render_template('home.html')
-            else:
-                return 'Password does not match our records. Please try again'
+        if not user_db_check or not check_password_hash(user_db_check.password, password):
+            flash('Please check your sign in details and try again.')
+            return redirect('/signin/')
+
+        login_user(user_db_check, remember=remember)
+        return redirect('/profile/')
 
     else:
         return render_template('signin.html')
@@ -185,8 +188,10 @@ def signin():
 
 
 @app.route('/signout')
+@login_required
 def signout():
-    return 'Signed Out'
+    logout_user()
+    return redirect('/home/')
 
 
 @app.route('/signup/')
@@ -194,9 +199,10 @@ def signup():
     return render_template('signup.html')
 
 
-@app.route('/profile')
+@app.route('/profile/')
+@login_required
 def profile():
-    return render_template('profile.html')
+    return render_template('profile.html', name=current_user.name)
 
 
 if __name__ == "__main__":
