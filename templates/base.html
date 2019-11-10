@@ -26,19 +26,16 @@
 <body>
   {% block navbar %}
   <!--Navbar-->
-  <nav id="mainNavbar" class="navbar navbar-dark navbar-expand-lg py-1 fixed-top" style="background-color: #343a40">
+  <nav id="Navbar" class="navbar navbar-light shadow-sm navbar-expand-lg py-1 fixed-top">
     <div class="container"><a class="navbar-brand" href="{{ url_for('index') }}">This Scenic Life</a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
         aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav ml-auto">
+        <ul class="nav navbar-nav">
           <li class="nav-item">
             <a class="nav-link" href="{{ url_for('blog') }}">Blog</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="{{ url_for('videos') }}">Videos</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="{{ url_for('about') }}">About</a>
@@ -46,6 +43,9 @@
           <li class="nav-item">
             <a class="nav-link" href="{{ url_for('contact') }}">Contact</a>
           </li>
+        </ul>
+        <ul class="nav navbar-nav ml-auto">
+
           {% if current_user.is_authenticated %}
           <li class="nav-item">
             <a class="nav-link" href="{{ url_for('profile') }}">
@@ -58,7 +58,10 @@
           {% endif %}
           {% if not current_user.is_authenticated %}
           <li clas="nav-item"><a class="nav-link" id="login" href="{{ url_for('signin') }}">Sign
-              In</a>
+              In <i class=" fas fa-user"></i></a>
+          </li>
+          <li clas="nav-item"><a class="nav-link" id="signup" href="{{ url_for('signup') }}">Sign
+              Up <i class=" fas fa-user-plus"></i></a>
           </li>
           {% endif %}
         </ul>

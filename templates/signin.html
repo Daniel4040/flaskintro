@@ -20,32 +20,34 @@
                     <fieldset>
                         <legend class="text-left header">Sign In</legend>
                         <div class="form-group">
-                            <span class="col-md-1 col-md-offset-2 text-center"><i class="fas fa-signature"></i></span>
+                            <span class="col-md-1 col-md-offset-2 text-center"><i class=" fas fa-user"></i></span>
                             <div class="col-md-8">
                                 <input id="username" name="username" type="email" placeholder="Username"
                                     class="form-control">
                             </div>
                         </div>
                         <div class="form-group">
-                            <span class="col-md-1 col-md-offset-2 text-center"><i
-                                    class="far fa-list-alt"></i></i></span>
+                            <span class="col-md-1 col-md-offset-2 text-center"><i class="fas fa-signature"></i></span>
                             <div class="col-md-8">
                                 <input id="password" name="password" type="password" placeholder="Password"
                                     class="form-control">
                             </div>
                         </div>
                         <div class="form-group">
-                            <div class="col-md-12 text-center">
+                            <div class="col-md-12">
                                 <button type="submit" class="btn btn-primary btn-lg">Submit</button>
+                                <a class="btn btn-outline-success btn-lg" id="signup"
+                                    href="{{ url_for('signup') }}">Sign Up</a>
+                                <div class="field">
+                                    <label class="checkbox">
+                                        <input type="checkbox">
+                                        Remember me
+                                    </label>
+                                </div>
                             </div>
-                            <div class="field">
-                                <label class="checkbox">
-                                    <input type="checkbox">
-                                    Remember me
-                                </label>
-                            </div>
+
                         </div>
-                        <a class="btn btn-success btn-lg" id="signup" href="{{ url_for('signup') }}">Sign Up</a>
+
                     </fieldset>
                 </form>
             </div>

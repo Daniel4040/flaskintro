@@ -15,31 +15,55 @@
         </div>
     </div>
     {% endif %}
+    <h1 style="text-align: center">Blog</h1>
     <div class="container" id="blog-table">
         <div class="row">
             <div class="col">
-                <h1 style="text-align: center">Blog</h1>
+
                 {% if blogs|length < 1 %}
                 <h4 style="text-align: center">There are no blogs. Create one below!</h4>
                 {% else %}
-                <table>
+
+                {% for blog in blogs %}
+                <div class="container" id="blog-entry">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <h3><b>{{ blog.title }}</b></h3>
+                            <p>{{ blog.content }}</p>
+                            {% if current_user.is_authenticated %}
+                            <a class="btn btn-success btn-md" href="/update/{{blog.id}}">Update</a>
+                            <a class="btn btn-danger btn-md" href="/delete/{{blog.id}}">Delete</a>
+                            {% endif %}
+                            <hr>
+                        </div>
+
+                    </div>
+                </div>
+
+                {% endfor %}
+
+                <!-- <table>
                     <tr>
                         <th>Title</th>
-                        <th>Blog Post</th>
+                        <th>Post</th>
+                        {% if current_user.is_authenticated %}
                         <th>Actions</th>
+                        {% endif %}
                     </tr>
                     {% for blog in blogs %}
                     <tr>
                         <td>{{ blog.title }}</td>
                         <td>{{ blog.content }}</td>
+                        {% if current_user.is_authenticated %}
                         <td>
                             <a href="/delete/{{blog.id}}">Delete</a>
                             <br>
                             <a href="/update/{{blog.id}}">Update</a>
                         </td>
+                        {% endif %}
                     </tr>
                     {% endfor %}
-                </table>
+                </table> -->
                 {% endif %}
             </div>
         </div>

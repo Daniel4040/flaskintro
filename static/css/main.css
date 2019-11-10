@@ -8,49 +8,45 @@ html {
 } */
 
 /*Navbar styling*/
-#mainNavbar {
-  font-size: 1.5rem;
-  font-weight: 100;
-  /* background-color: rgb(102, 102, 102); */
+#Navbar {
+  background-color: #f7f7f7;
+  box-shadow: small;
 }
 
-/* #mainNavbar .nav-link {
-  color: rgb(255, 255, 255);
-} */
+#Navbar .nav-link {
+  color: rgb(66, 66, 66);
+}
 
-#mainNavbar .nav-link:hover {
+#Navbar .nav-link:hover {
   color: #c0392b;
 }
 
-#mainNavbar .navbar-brand {
-  color: rgb(255, 255, 255);
+#Navbar .navbar-brand {
+  color: rgb(66, 66, 66);
   font-family: "Kaushan Script";
-  font-weight: 200;
-  font-size: 1.5rem;
+  font-weight: 250;
+  font-size: 1.4rem;
   text-transform: none;
+}
+
+#Navbar .navbar-brand:hover {
+  color: #c0392b;
 }
 
 .navbar a {
   font-family: "Montserrat", "Helvetica Neue", Helvetica, Arial, cursive;
-  text-decoration: none;
-  text-transform: uppercase;
   font-weight: 500;
-  letter-spacing: 1px;
-  color: white;
 }
 
 .nav-item {
   font-family: "Montserrat", "Helvetica Neue", Helvetica, Arial, sans-serif;
-  text-transform: uppercase;
   font-weight: 500;
-  letter-spacing: 1px;
 }
 
-@media (max-width: 768px) {
-  .navbar {
-    background-color: #34495e;
-  }
+.navbar-toggler {
+  color: rgb(66, 66, 66);
 }
+
 @media (min-width: 576px) {
   .background {
     padding-top: 25vh;
@@ -125,7 +121,16 @@ html {
 /* Blog Page */
 
 #blog-table {
+  padding-top: 2rem;
   padding-bottom: 4rem;
+}
+
+#blog-entry {
+  padding-top: 10vh;
+}
+
+#blog-entry h3 {
+  font-family: "Kaushan Script";
 }
 
 table,
