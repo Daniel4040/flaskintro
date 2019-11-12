@@ -126,7 +126,7 @@ html {
 }
 
 #blog-entry {
-  padding-top: 10vh;
+  height: 100vh;
 }
 
 #blog-entry h3 {
@@ -163,7 +163,7 @@ td {
   padding-bottom: 1rem;
 }
 
-img {
+#rounded-pic {
   height: 225px;
   width: 225px;
   border: 4px solid rgb(214, 214, 214);
@@ -186,6 +186,13 @@ img {
   border-image-repeat: initial;
   position: center;
   margin-bottom: 20px;
+}
+
+#about-pic,
+#profile-pic {
+  height: 325px;
+  width: 325px;
+  border: 4px solid rgb(69, 109, 150);
 }
 
 /* Create body gap for navbar */

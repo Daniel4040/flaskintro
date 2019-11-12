@@ -45,16 +45,17 @@ class Category(db.Model):
         return self.name
 
 
-class User(UserMixin, db.Model):
+class User(db.Model, UserMixin):
     # For creating admin users who can post new blogs to the website
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(32), nullable=False)
     username = db.Column(db.String(32), unique=True, nullable=False)
     password = db.Column(db.String(32), nullable=False)
+    image_file = db.Column(db.String(20), nullable=False, default='default.jpg')
 
 
 @app.route('/blog/', methods=['POST', 'GET'])
-def add_blog():
+def blog():
     if request.method == 'POST':
         blog_title = request.form['title']
         blog_content = request.form['content']
@@ -76,7 +77,7 @@ def add_blog():
 
 
 @app.route('/signup/', methods=['POST', 'GET'])
-def add_user():
+def signup():
     if request.method == 'POST':
         name = request.form['new_name']
         username = request.form['new_username']
@@ -96,7 +97,7 @@ def add_user():
 
 
 @app.route('/signin/', methods=['POST', 'GET'])
-def sign_in():
+def signin():
     if request.method == 'POST':
         username = request.form['username']
         password = request.form['password']
@@ -147,19 +148,15 @@ def update(id):
 
 
 @app.route('/')
+@app.route('/home/')
 def index():
     return render_template('index.html')
 
 
-@app.route('/home/')
-def home():
-    return render_template('index.html')
-
-
-@app.route('/blog/')
-def blog():
-    blogs = Blog.query.order_by(Blog.date_published).all()
-    return render_template('blog.html', blogs=blogs)
+# @app.route('/blog/')
+# def blog():
+#     blogs = Blog.query.order_by(Blog.date_published).all()
+#     return render_template('blog.html', blogs=blogs)
 
 
 @app.route('/createblog/')
@@ -182,9 +179,9 @@ def contact():
     return render_template('contact.html')
 
 
-@app.route('/signin/')
-def signin():
-    return render_template('signin.html')
+# @app.route('/signin/')
+# def signin():
+#     return render_template('signin.html')
 
 
 @app.route('/signout')
@@ -194,15 +191,23 @@ def signout():
     return redirect('/home/')
 
 
-@app.route('/signup/')
-def signup():
-    return render_template('signup.html')
+# @app.route('/signup/')
+# def signup():
+#     return render_template('signup.html')
 
 
-@app.route('/profile/')
+@app.route('/profile/', methods=['GET', 'POST'])
 @login_required
 def profile():
-    return render_template('profile.html', name=current_user.name)
+    if request.method == 'POST':
+        current_user.name = request.form['change-name']
+        current_user.username = request.form['change-username']
+        db.session.commit()
+        flash('Your account has been updated.', 'success')
+        return redirect('/profile/')
+    else:  
+        image_file = url_for('static', filename='profile_pics/' + current_user.image_file)
+        return render_template('profile.html', name=current_user.name, username=current_user.username, image_file=image_file)
 
 
 if __name__ == "__main__":
